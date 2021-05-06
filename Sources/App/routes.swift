@@ -1,17 +1,12 @@
 import Vapor
 
 func routes(_ app: Application) throws {
-    app.get { req in
-        return req.view.render("index", ["title": "Hello Vapor!"])
-    }
 
-    app.get("hello") { req -> String in
-        return "Hello, world!"
-    }
-    
     //MARK: Controllers
     let blockchainController = BlockchainController()
+    let websiteController = WebsiteController()
     
     //MARK: Routes registration
     try app.register(collection: blockchainController)
+    try app.register(collection: websiteController)
 }

@@ -10,8 +10,6 @@ import Foundation
 
 struct BlockchainController : RouteCollection {
     
-    let blockchain = Blockchain()
-    
     func boot(routes: RoutesBuilder) throws {
         let blockchainRoutes = routes.grouped("api")
         blockchainRoutes.get("mine", use: mineHandler)
@@ -22,19 +20,19 @@ struct BlockchainController : RouteCollection {
     // MARK: Handlers
     
     func mineHandler(_ req: Request) -> Block {
-        let lastBlock = blockchain.lastBlock()
+        let lastBlock = Blockchain.shared.lastBlock()
         let lastProof = lastBlock.proof
         let previousHash = lastBlock.hash()
-        return blockchain.newBlock(proof: lastProof, previousHash: previousHash)
+        return Blockchain.shared.newBlock(proof: lastProof, previousHash: previousHash)
     }
     
     func newTransactionHandler(_ req: Request) throws -> Int {
         let transaction = try req.content.decode(Transaction.self)
-        return blockchain.newTransaction(sender: transaction.sender, recipient: transaction.recipient, amount: transaction.amount)
+        return Blockchain.shared.newTransaction(sender: transaction.sender, recipient: transaction.recipient, amount: transaction.amount)
     }
     
     func getChainHandler(_ req: Request) -> [Block] {
-        return blockchain.chain
+        return Blockchain.shared.chain
     }
 
     

@@ -1,0 +1,15 @@
+#extend("base"):
+    #export("content"):
+      #if(chain):
+       #for(block in chain):
+        <h3>#(block.index) Coffee</h2>
+        <p>#(block.timestamp)</p>
+        <p>#(block.proof)</p>
+        <p>#(block.previousHash)</p>
+        <p>#(block.transaction)</p>
+       #endfor
+      #else:
+      <h2>There is not chain yet ;)</h2>
+      #endif
+  #endexport
+#endextend

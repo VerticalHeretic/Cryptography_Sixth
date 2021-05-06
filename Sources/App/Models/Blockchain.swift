@@ -14,6 +14,8 @@ class Blockchain {
     
     var chain : [Block] = []
     
+    static let shared = Blockchain()
+    
     init() {
         newBlock(proof: 100, previousHash: "1".data(using: .utf8))
     }
