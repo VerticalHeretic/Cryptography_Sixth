@@ -21,8 +21,11 @@ struct BlockchainController : RouteCollection {
     
     // MARK: Handlers
     
-    func mineHandler(_ req: Request) -> String {
-        return "We'll mine a new Block"
+    func mineHandler(_ req: Request) -> Block {
+        let lastBlock = blockchain.lastBlock()
+        let lastProof = lastBlock.proof
+        let previousHash = lastBlock.hash()
+        return blockchain.newBlock(proof: lastProof, previousHash: previousHash)
     }
     
     func newTransactionHandler(_ req: Request) throws -> Int {
