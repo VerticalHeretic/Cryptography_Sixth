@@ -1,6 +1,5 @@
 #extend("base"):
     #export("content"):
-      <h1>#(title)</h1>
-      <p>#(description)</p>
+      <h1>Minining... ⛏<h2>
   #endexport
 #endextend

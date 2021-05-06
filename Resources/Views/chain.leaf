@@ -5,8 +5,9 @@
         <h3>#(block.index) Coffee</h2>
         <p>#(block.timestamp)</p>
         <p>#(block.proof)</p>
-        <p>#(block.previousHash)</p>
-        <p>#(block.transaction)</p>
+        #for(tran in block.transaction):
+            <p>✉️: #(tran.sender), 📩: #(tran.recipient), ☕️: #(tran.amount)</p>
+        #endfor
        #endfor
       #else:
       <h2>There is not chain yet ;)</h2>
