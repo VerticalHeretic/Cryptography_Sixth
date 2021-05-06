@@ -8,4 +8,10 @@ func routes(_ app: Application) throws {
     app.get("hello") { req -> String in
         return "Hello, world!"
     }
+    
+    //MARK: Controllers
+    let blockchainController = BlockchainController()
+    
+    //MARK: Routes registration
+    try app.register(collection: blockchainController)
 }

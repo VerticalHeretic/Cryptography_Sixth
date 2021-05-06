@@ -10,7 +10,6 @@ import Foundation
 
 class Blockchain {
     
-    
     private var currentTransactions: [Transaction] = []
     
     var chain : [Block] = []
@@ -25,13 +24,13 @@ class Blockchain {
      - Parameter previousHash : Hash of previous Block
      - Returns : New Block
      */
-    func newBlock(proof: Int, previousHash: Data? = nil) -> Data{
+    func newBlock(proof: Int, previousHash: Data? = nil) -> Block {
         let prevHash : Data
         
         if let previousHash = previousHash {
             prevHash = previousHash
         } else {
-            prevHash = chain.last?.hash()
+            prevHash = lastBlock().hash()
         }
         
         let block = Block(index: chain.count + 1, timestamp: Date().timeIntervalSince1970, transaction: currentTransactions, proof: proof, previousHash: prevHash)
@@ -50,10 +49,18 @@ class Blockchain {
      - Parameter amount : Amount for the transaction
      - Returns:The index of the Block that will hold this transaction
      */
-    func newTransaction(sender : String, recipient: String, amount : Int) -> Block {
+    func newTransaction(sender : String, recipient: String, amount : Int) -> Int {
         self.currentTransactions.append(Transaction(sender: sender, recipient: recipient, amount: amount))
-        return self.chain.last?.index + 1
+        return lastBlock().index + 1
     }
+    
+    func lastBlock() -> Block {
+        guard let last = chain.last else {
+            fatalError("The chain should have at least one block as a genesis.")
+        }
+        return last
+    }
+    
     
     /** Simple Proof of Work Algorithm: Find a number p' such that hash(pp') contains leading 4 zeroes, where p is the previous p' , p is the previous proof, and p' is the new proof
      */

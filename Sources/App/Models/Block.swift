@@ -7,8 +7,9 @@
 
 import Foundation
 import CommonCrypto
+import Vapor
 
-struct Block : Codable {
+struct Block : Codable, Content {
     let index: Int
     let timestamp : Double
     let transaction : [Transaction]
