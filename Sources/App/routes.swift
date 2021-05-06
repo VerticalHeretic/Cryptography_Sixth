@@ -9,4 +9,6 @@ func routes(_ app: Application) throws {
     //MARK: Routes registration
     try app.register(collection: blockchainController)
     try app.register(collection: websiteController)
+    
+    print(app.routes.all)
 }

@@ -23,3 +23,10 @@ docker run --name vapor-server -p 8080:8080 coffee-coin-image
 docker run --rm -p 8080:8080 -it coffee-coin-image
 
 ```
+
+### Endpoints: 
+
+You can see all endpoints with command: 
+```
+swift run Run routes
+```
